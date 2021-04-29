@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+    <p>
+        Hello there <b>{{ user.email }}</b>
+        <a href="{% url "auth:account" %}">Manage Account</a>
+    </p>
+    <a href="{% url 'auth:logout' %}">Logout</a>
+{% else %}
+    <p><a href="{% url 'auth:django_registration_register' %}">Register</a></p>
+    <p>Log In: <a href="{% url 'auth:login' %}?next={{ request.path }}">click</a></p>
+{% endif %}
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            {% if message.tags %}
+                <li class="{{ message.tags }}"></li>
+            {% else %}
+                <li>
+            {% endif %}
+            {{ message }}
+        {% endfor %}
+    </ul>
+{% endif %}
+{% block content %}
+{% endblock content %}
+</body>
+</html>

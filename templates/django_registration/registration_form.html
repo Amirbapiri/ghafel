@@ -1,0 +1,16 @@
+{% extends parent_template|default:"django_registration/base.html" %}
+
+{% block title %}
+    {{ block.super }} - Create Account
+{% endblock title %}
+
+{% block content %}
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Registration</button>
+    </form>
+    <ul>
+        <li><a href="{% url "auth:login" %}">Already have a account?</a></li>
+    </ul>
+{% endblock content %}
